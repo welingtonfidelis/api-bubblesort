@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="array">Array de entrada (separar por ','')</label>
+    <input id="array" type="text">
+    <button onclick="sendRequest()">ENVIAR</button>
+
+    <div id="arrayResp">Resultado</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    async function sendRequest(){
+        
+        let array = document.getElementById('array').value;
+        array = array.split(',');
+
+        console.log('enviar', array);
+
+        const resp = await axios.post('http://localhost:3000/sort', {
+            array
+        })        
+
+        console.log('resp', resp.data);
+
+        document.getElementById('arrayResp').innerHTML = resp.data;
+        
+    }
+</script>
+</html>
